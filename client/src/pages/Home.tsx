@@ -99,6 +99,7 @@ export default function Home() {
                 size="lg"
                 variant="outline"
                 className="border-2 border-blue-500 text-white font-bold px-8 py-6 text-lg hover:bg-blue-500/10"
+                onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
               >
                 See How It Works
               </Button>
@@ -132,7 +133,11 @@ export default function Home() {
                 icon: <BarChart3 className="w-8 h-8 text-blue-400" />,
               },
             ].map((service, idx) => (
-              <Card key={idx} className="blueprint-card p-8 border-blue-500/30">
+              <Card 
+                key={idx} 
+                className="blueprint-card p-8 border-blue-500/30 cursor-pointer hover:border-blue-400 hover:bg-blue-500/5 transition-all duration-300"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
                 <div className="mb-4">{service.icon}</div>
                 <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
                 <p className="text-blue-400 font-bold text-lg mb-4">{service.price}</p>
