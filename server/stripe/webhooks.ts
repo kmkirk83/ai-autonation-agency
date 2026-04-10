@@ -20,7 +20,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
     );
   } catch (err: any) {
     console.error("Webhook signature verification failed:", err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    return res.status(200).json({ verified: false, error: err.message });
   }
 
   // Handle test events
@@ -140,9 +140,9 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         console.log(`Unhandled event type: ${event.type}`);
     }
 
-    res.json({ received: true });
+    res.status(200).json({ verified: true, received: true });
   } catch (error: any) {
     console.error("Webhook processing error:", error);
-    res.status(500).json({ error: error.message });
+    res.status(200).json({ verified: true, error: error.message });
   }
 }
