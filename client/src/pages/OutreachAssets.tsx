@@ -8,6 +8,21 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Copy, Loader2 } from "lucide-react";
 
+const HVAC_TEMPLATES = [
+  {
+    businessName: "ABC HVAC Services",
+    niche: "HVAC",
+    coldEmail: `Subject: 62% of Your Calls Go Unanswered - Here's the Solution\n\nHi [Owner Name],\n\nI noticed ABC HVAC Services is getting calls from homeowners needing emergency AC repairs, but I'm guessing some of those calls are going to voicemail or getting missed entirely.\n\nHere's the problem: The average HVAC company loses $187K/year from missed calls alone. That's money left on the table.\n\nHere's the solution: We've deployed AI voice agents for 50+ HVAC companies in your area. They answer every call 24/7, qualify leads, and book appointments automatically. No more missed opportunities.\n\nThe result? Our clients see a 30% increase in booked appointments within the first 30 days.\n\nWant to see how it works? I can show you in 15 minutes.\n\n[Schedule a demo]\n\nBest,\n[Your Name]\nAI Automation Agency`,
+    loomScript: `[0:00-0:05] "Hey [Owner Name], I wanted to show you something that's been game-changing for HVAC companies like yours."\n\n[0:05-0:15] "Right now, 62% of service calls go unanswered. That's missed revenue, missed customers, and missed growth."\n\n[0:15-0:25] "We've built an AI voice agent that answers every call, books appointments, and qualifies leads 24/7. No more missed opportunities."\n\n[0:25-0:35] "Our clients see a 30% increase in booked appointments in the first month. One company went from losing $187K/year to capturing all their calls."\n\n[0:35-0:45] "The setup takes 2 hours. The ROI is immediate. Want to see it in action?"\n\n[0:45-0:60] "Book a 15-minute demo with me. I'll show you exactly how it works for HVAC companies. Link in the description."`,
+  },
+  {
+    businessName: "Premier Plumbing Co",
+    niche: "Plumbing",
+    coldEmail: `Subject: Your Plumbing Business Is Leaving $150K+ on the Table Every Year\n\nHi [Owner Name],\n\nI work with plumbing companies across the country, and I see the same problem over and over: missed calls = missed revenue.\n\nThe average plumbing company loses $150K+ annually from unanswered calls. That's money that should be in your pocket.\n\nWe've built an AI solution that:\n- Answers every call 24/7 (even at 3 AM)\n- Books emergency appointments automatically\n- Qualifies leads before they reach your team\n- Reduces your phone staff workload by 70%\n\nOur plumbing clients are seeing:\n- 35% more booked appointments\n- $50K+ additional revenue in the first 90 days\n- Zero missed emergency calls\n\nWant to see how it works? I can walk you through it in 15 minutes.\n\n[Schedule a demo]\n\nBest,\n[Your Name]\nAI Automation Agency`,
+    loomScript: `[0:00-0:05] "Hi [Owner Name], I'm reaching out because I think we can help you capture every plumbing call that's currently going to voicemail."\n\n[0:05-0:15] "Here's the reality: Your competitors are losing money on missed calls too. But the ones using AI are capturing all of it."\n\n[0:15-0:25] "We've deployed AI voice agents for 40+ plumbing companies. They answer calls, book emergency appointments, and qualify leads 24/7."\n\n[0:25-0:35] "One of our clients went from losing $150K/year to capturing every single call. That's $50K+ in new revenue in just 90 days."\n\n[0:35-0:45] "Setup is simple. ROI is immediate. Want to see it?"\n\n[0:45-0:60] "Book a 15-minute discovery call. I'll show you exactly how it works for your plumbing business. Link in the description."`,
+  },
+];
+
 export default function OutreachAssets() {
   const { user } = useAuth();
   const [businessName, setBusinessName] = useState("");
@@ -54,6 +69,7 @@ export default function OutreachAssets() {
   };
 
   const assets = assetsQuery.data || [];
+  const allAssets = [...HVAC_TEMPLATES, ...assets];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -158,16 +174,16 @@ export default function OutreachAssets() {
           </div>
         )}
 
-        {/* Previously Generated Assets */}
-        {assets.length > 0 && (
+        {/* Prebuilt Templates & Previously Generated Assets */}
+        {allAssets.length > 0 && (
           <div>
             <h2 className="text-3xl font-bold mb-8">Previously Generated Assets</h2>
             <div className="space-y-6">
-              {assets.map((asset) => (
-                <Card key={asset.id} className="blueprint-card p-8 border-blue-500/30">
+              {allAssets.map((asset, idx) => (
+                <Card key={idx} className="blueprint-card p-8 border-blue-500/30">
                   <div className="mb-4">
                     <h3 className="text-xl font-bold text-blue-400">{asset.businessName}</h3>
-                    <p className="text-sm text-gray-400">{asset.niche} • {new Date(asset.createdAt).toLocaleDateString()}</p>
+                    <p className="text-sm text-gray-400">{asset.niche}{(asset as any).createdAt ? " • " + new Date((asset as any).createdAt).toLocaleDateString() : " • Template"}</p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>

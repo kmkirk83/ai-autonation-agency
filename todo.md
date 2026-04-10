@@ -39,13 +39,13 @@
 - [x] Test LLM outreach tool output quality
 - [x] Test owner notifications
 - [x] Verify protected routes (owner-only access)
-- [ ] Create checkpoint and prepare for deployment
+- [x] Create checkpoint and prepare for deployment
 
 ## Additional Enhancements
-- [ ] Add Calendly booking widget or direct scheduling link to landing page
-- [ ] Add prebuilt HVAC lead outreach templates to outreach assets page
-- [ ] Implement structured LLM output validation (JSON schema)
-- [ ] Add frontend component tests for ROI calculator
-- [ ] Add frontend component tests for admin dashboard
-- [ ] Add LLM output quality tests with mocking
-- [ ] Add owner notification trigger tests
+- [x] Add Calendly booking widget or direct scheduling link to landing page
+- [x] Add prebuilt HVAC lead outreach templates to outreach assets page
+- [x] Implement structured LLM output validation (JSON schema)
+- [x] Add frontend component tests for ROI calculator
+- [x] Add frontend component tests for admin dashboard
+- [x] Add LLM output quality tests with mocking
+- [x] Add owner notification trigger tests

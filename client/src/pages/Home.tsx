@@ -209,11 +209,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Booking CTA Section */}
+      <section className="py-20 sm:py-32 border-b border-blue-500/20 bg-blue-500/5">
+        <div className="container">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Ready to Transform Your Business?</h2>
+            <p className="text-gray-300 mb-8 text-lg">Book a free 15-minute discovery call to see how our AI solutions can capture every missed call and increase your revenue.</p>
+            <Button
+              size="lg"
+              className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg"
+              onClick={() => window.open("https://calendly.com/ai-automation-agency/15min", "_blank")}
+            >
+              Schedule 15-Minute Discovery Call
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Lead Capture Form */}
       <section id="contact" className="py-20 sm:py-32">
         <div className="container">
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-center">Get Started Today</h2>
-          <p className="text-center text-gray-300 mb-12 text-lg">Schedule your free 15-minute discovery call with our AI automation experts.</p>
+          <p className="text-center text-gray-300 mb-12 text-lg">Or fill out the form below and we'll reach out to schedule your free 15-minute discovery call.</p>
           
           <div className="max-w-2xl mx-auto">
             <Card className="blueprint-card p-8 border-blue-500/30">
