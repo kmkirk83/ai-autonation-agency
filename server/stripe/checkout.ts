@@ -1,7 +1,13 @@
 import Stripe from "stripe";
 import { ENV } from "../_core/env";
 
-const stripe = new Stripe(ENV.stripeSecretKey);
+function getStripe() {
+  if (!ENV.stripeSecretKey) {
+    throw new Error("Stripe is not configured");
+  }
+
+  return new Stripe(ENV.stripeSecretKey);
+}
 
 export async function createCheckoutSession(options: {
   userId: number;
@@ -13,6 +19,7 @@ export async function createCheckoutSession(options: {
   successUrl: string;
   cancelUrl: string;
 }) {
+  const stripe = getStripe();
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     customer_email: options.userEmail,
@@ -53,6 +60,7 @@ export async function createSubscriptionSession(options: {
   successUrl: string;
   cancelUrl: string;
 }) {
+  const stripe = getStripe();
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     customer_email: options.userEmail,

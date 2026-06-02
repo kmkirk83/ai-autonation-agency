@@ -5,12 +5,23 @@ import { getDb } from "../db";
 import { orders, subscriptions, users } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 
-const stripe = new Stripe(ENV.stripeSecretKey);
+function getStripe() {
+  if (!ENV.stripeSecretKey) {
+    return null;
+  }
+
+  return new Stripe(ENV.stripeSecretKey);
+}
 
 export async function handleStripeWebhook(req: Request, res: Response) {
   const sig = req.headers["stripe-signature"] as string;
 
   let event: Stripe.Event;
+  const stripe = getStripe();
+
+  if (!stripe) {
+    return res.status(200).json({ verified: false, error: "Stripe is not configured" });
+  }
 
   try {
     event = stripe.webhooks.constructEvent(

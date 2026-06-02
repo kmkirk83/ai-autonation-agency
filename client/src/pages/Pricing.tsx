@@ -7,15 +7,14 @@ import { toast } from "sonner";
 
 export default function Pricing() {
   const { user, isAuthenticated } = useAuth();
-  const { data: products, isLoading } = trpc.payments.getProducts.useQuery(
-    void 0,
-    { enabled: isAuthenticated }
-  );
+  const { data: products, isLoading } = trpc.payments.getProducts.useQuery(undefined, {
+    enabled: isAuthenticated,
+  });
   const createCheckout = trpc.payments.createCheckout.useMutation();
 
   const handlePurchase = async (productKey: string) => {
     if (!isAuthenticated) {
-      window.location.href = getLoginUrl("/pricing");
+      window.location.href = getLoginUrl();
       return;
     }
 

@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { paymentsRouter } from "./routers/payments";
+import { leadsRouter, outreachRouter } from "./routers/engagement";
 
 export const appRouter = router({
   system: systemRouter,
@@ -16,6 +17,8 @@ export const appRouter = router({
       } as const;
     }),
   }),
+  leads: leadsRouter,
+  outreach: outreachRouter,
   payments: paymentsRouter,
 });
 
